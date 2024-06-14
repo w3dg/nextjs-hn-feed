@@ -1,21 +1,44 @@
+"use client";
+
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function Navbar() {
+  const pathname = usePathname();
+  console.log(pathname);
   return (
-    <nav className="flex gap-2 items-center w-full p-4 bg-accent text-secondary-foreground">
-      <Link href="/" className="text-slate-300 font-bold hover:underline">
+    <nav className="flex gap-1 items-center w-full px-4 py-3 text-lg bg-accent text-secondary-foreground">
+      <Link
+        href="/top"
+        className={cn("text-accent-foreground font-bold hover:underline px-2 py-1 md:px-4 md:py-3", {
+          "bg-neutral-100/10 rounded-lg": pathname === "/top",
+        })}
+      >
         Hackernews
       </Link>
-      <Link href="/newest" className="hover:underline">
+      <Link
+        href="/new"
+        className={cn("hover:underline p-1 md:px-4 md:py-3", { "bg-neutral-100/10 rounded-lg": pathname === "/new" })}
+      >
         new
       </Link>
-      <Link href="/show" className="hover:underline">
+      <Link
+        href="/show"
+        className={cn("hover:underline p-1 md:px-4 md:py-3", { "bg-neutral-100/10 rounded-lg": pathname === "/show" })}
+      >
         show
       </Link>
-      <Link href="/ask" className="hover:underline">
+      <Link
+        href="/ask"
+        className={cn("hover:underline p-1 md:px-4 md:py-3", { "bg-neutral-100/10 rounded-lg": pathname === "/ask" })}
+      >
         ask
       </Link>
-      <Link href="/jobs" className="hover:underline">
+      <Link
+        href="/jobs"
+        className={cn("hover:underline p-1 md:px-4 md:py-3", { "bg-neutral-100/10 rounded-lg": pathname === "/jobs" })}
+      >
         jobs
       </Link>
     </nav>

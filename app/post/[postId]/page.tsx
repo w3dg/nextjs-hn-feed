@@ -1,5 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import UserComment from "@/components/Comment";
+import Link from "next/link";
+import { User2 } from "lucide-react";
 
 export interface CommentType {
   id: number;
@@ -20,7 +22,7 @@ interface PostItem {
   time_ago: string;
   type: string;
   url: string;
-  domain: string;
+  domain?: string;
   comments_count: number;
   comments: CommentType[];
 }
@@ -31,7 +33,7 @@ interface PostItemProps {
   };
 }
 
-async function UserPage({ params }: PostItemProps) {
+async function PostPage({ params }: PostItemProps) {
   const { postId } = params;
   const postResponse = await fetch(`https://api.hackerwebapp.com/item/${postId}`);
   const postJson: PostItem = await postResponse.json();
@@ -43,14 +45,23 @@ async function UserPage({ params }: PostItemProps) {
           <CardTitle>{postJson.title}</CardTitle>
           <CardDescription className="flex gap-2 items-center">
             <span>Points: {postJson.points || 0}</span>
-            <span>Posted by: {postJson.user || ""}</span>
+            <Link
+              href={`/user/${postJson.user}`}
+              className="flex gap-2 items-center text-accent-foreground hover:underline"
+            >
+              <User2 className="w-4 h-4" />
+              by {postJson.user}
+            </Link>
             <span>Posted {postJson.time_ago}</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <a href={postJson.url} target="_blank">
-            ({postJson.domain})
-          </a>
+          {postJson.domain && (
+            <a href={postJson.url} target="_blank">
+              ({postJson.domain})
+            </a>
+          )}
+          {!postJson.domain && <p>Item id: {postJson.id}</p>}
         </CardContent>
       </Card>
 
@@ -66,4 +77,4 @@ async function UserPage({ params }: PostItemProps) {
   );
 }
 
-export default UserPage;
+export default PostPage;

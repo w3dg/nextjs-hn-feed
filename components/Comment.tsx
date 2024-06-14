@@ -32,7 +32,7 @@ function UserComment({ comments }: UserCommentProps) {
               </h4>
               <p className="text-muted-foreground">{comment.time_ago}</p>
             </div>
-            <div className="prose-invert pb-4" dangerouslySetInnerHTML={{ __html: comment.content }}></div>
+            <div className="prose-invert pb-4 text-wrap" dangerouslySetInnerHTML={{ __html: comment.content }}></div>
             {comment.comments.length != 0 && <UserComment comments={comment.comments} />}
           </article>
         );
