@@ -42,17 +42,21 @@ async function PostPage({ params }: PostItemProps) {
     <main className="flex p-8 flex-col gap-6">
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>{postJson.title}</CardTitle>
-          <CardDescription className="flex gap-2 items-center">
-            <span>Points: {postJson.points || 0}</span>
-            <Link
-              href={`/user/${postJson.user}`}
-              className="flex gap-2 items-center text-accent-foreground hover:underline"
-            >
-              <User2 className="w-4 h-4" />
-              by {postJson.user}
-            </Link>
-            <span>Posted {postJson.time_ago}</span>
+          <CardTitle className="text-base md:text-xl">{postJson.title}</CardTitle>
+          <CardDescription>
+            <div className="grid gap-1">
+              <div className="flex gap-1">
+                <span>{postJson.points || 0} points</span>
+                <span>posted {postJson.time_ago}</span>
+              </div>
+              <Link
+                href={`/user/${postJson.user}`}
+                className="flex gap-2 items-center text-accent-foreground hover:underline"
+              >
+                <User2 className="w-4 h-4" />
+                by {postJson.user}
+              </Link>
+            </div>
           </CardDescription>
         </CardHeader>
         <CardContent>

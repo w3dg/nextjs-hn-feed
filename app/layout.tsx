@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={GeistSans.className}>
+      <body className={GeistSans.className + " text-xs md:text-base"}>
         <Navbar />
         {children}
       </body>

@@ -8,7 +8,7 @@ function Navbar() {
   const pathname = usePathname();
   console.log(pathname);
   return (
-    <nav className="flex gap-1 items-center w-full px-4 py-3 text-lg bg-accent text-secondary-foreground">
+    <nav className="text-sm md:text-lg flex gap-1 items-center w-full px-4 py-3 bg-accent text-secondary-foreground">
       <Link
         href="/top"
         className={cn("text-accent-foreground font-bold hover:underline px-2 py-1 md:px-4 md:py-3", {

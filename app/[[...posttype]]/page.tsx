@@ -92,15 +92,19 @@ export default async function Home({ params, searchParams }: HomePageProps) {
             <CardHeader>
               <CardTitle className="text-lg font-bold">{post.title}</CardTitle>
               <CardDescription className="flex gap-2">
-                <span>{post.points || 0} points</span>
-                <span>posted {post.time_ago}</span>
-                <Link
-                  href={`/user/${post.user}`}
-                  className="flex gap-2 items-center text-accent-foreground hover:underline"
-                >
-                  <User2 className="w-4 h-4" />
-                  by {post.user}
-                </Link>
+                <div className="grid gap-1">
+                  <div className="flex gap-1">
+                    <span>{post.points || 0} points</span>
+                    <span>posted {post.time_ago}</span>
+                  </div>
+                  <Link
+                    href={`/user/${post.user}`}
+                    className="flex gap-2 items-center text-accent-foreground hover:underline"
+                  >
+                    <User2 className="w-4 h-4" />
+                    by {post.user}
+                  </Link>
+                </div>
               </CardDescription>
             </CardHeader>
             <CardContent className="text-foreground font-semibold">
