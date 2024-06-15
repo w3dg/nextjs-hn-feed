@@ -37,7 +37,7 @@ async function PostPage({ params }: PostItemProps) {
   const { postId } = params;
   const postResponse = await fetch(`https://api.hackerwebapp.com/item/${postId}`);
   const postJson: PostItem = await postResponse.json();
-  // console.log(postJson);
+
   return (
     <main className="flex p-8 flex-col gap-6">
       <Card className="w-full">

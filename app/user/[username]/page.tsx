@@ -1,5 +1,3 @@
-// https://hacker-news.firebaseio.com/v0/user/${username}.json
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface User {

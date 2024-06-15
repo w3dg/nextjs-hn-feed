@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { User2 } from "lucide-react";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const BASE_API_URL = "https://api.hackerwebapp.com";
 
@@ -56,7 +56,6 @@ export default async function Home({ params, searchParams }: HomePageProps) {
   }
 
   const API_URL = `${BASE_API_URL}/${hnSectionType}?page=${page}`;
-  console.log(API_URL);
   const response = await fetch(API_URL);
   const newsPosts: NewsPost[] = await response.json();
 
@@ -65,25 +64,19 @@ export default async function Home({ params, searchParams }: HomePageProps) {
       <h2 className="font-bold text-2xl capitalize">{hnSectionType}</h2>
       <div className="flex gap-4">
         {page >= 2 ? (
-          <Link
-            className="px-2 py-1 rounded bg-slate-500 text-slate-100"
-            href={`/${posttype}?page=${Number(page) - 1}`}
-          >
+          <Link className="px-2 py-1 rounded underline text-slate-100" href={`/${posttype}?page=${Number(page) - 1}`}>
             prev
           </Link>
         ) : (
-          <p className="px-2 py-1 rounded bg-muted text-slate-100">prev</p>
+          <p className="px-2 py-1 rounded text-muted-foreground">prev</p>
         )}
         <h3 className="p-1 font-semibold">Page {page}</h3>
         {newsPosts.length !== 0 ? (
-          <Link
-            className="px-2 py-1 rounded bg-slate-500 text-slate-100"
-            href={`/${posttype}?page=${Number(page) + 1}`}
-          >
+          <Link className="px-2 py-1 rounded underline text-slate-100" href={`/${posttype}?page=${Number(page) + 1}`}>
             next
           </Link>
         ) : (
-          <p className="px-2 py-1 rounded bg-muted text-slate-100">next</p>
+          <p className="px-2 py-1 rounded text-muted-foreground">next</p>
         )}
       </div>
       {newsPosts.map((post) => {
@@ -97,13 +90,17 @@ export default async function Home({ params, searchParams }: HomePageProps) {
                     <span>{post.points || 0} points</span>
                     <span>posted {post.time_ago}</span>
                   </div>
-                  <Link
-                    href={`/user/${post.user}`}
-                    className="flex gap-2 items-center text-accent-foreground hover:underline"
-                  >
-                    <User2 className="w-4 h-4" />
-                    by {post.user}
-                  </Link>
+                  {post.user ? (
+                    <Link
+                      href={`/user/${post.user}`}
+                      className="flex gap-2 items-center text-accent-foreground hover:underline"
+                    >
+                      <User2 className="w-4 h-4" />
+                      by {post.user}
+                    </Link>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </CardDescription>
             </CardHeader>
